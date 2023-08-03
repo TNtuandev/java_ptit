@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +37,6 @@ public class Home extends javax.swing.JFrame {
         );
 
         List<String> a = new ArrayList<>();
-        a.add("1");
-        data.add(a);
         for (List<String> rowData : data) {
             tableModel.addRow(rowData.toArray());
         }
@@ -46,6 +47,15 @@ public class Home extends javax.swing.JFrame {
 
         // Repack the frame to properly display the components
         pack();
+    }
+    
+    private static void writeDataToFile(List<List<String>> data) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("book.dat"))) {
+            outputStream.writeObject(data);
+            System.out.println("Data has been written to book.dat");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -75,6 +85,7 @@ public class Home extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txtChuyenNganh = new javax.swing.JComboBox<>();
+        btnDelete1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +157,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         btnSave1.setText("Xuất File");
+        btnSave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSave1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,6 +177,13 @@ public class Home extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         txtChuyenNganh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khoa học tự nhiên", "Văn học – Nghệ thuật", "Điện tử Viễn thông", "Công nghệ thông tin" }));
+
+        btnDelete1.setText("Xóa");
+        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,6 +216,7 @@ public class Home extends javax.swing.JFrame {
                             .addGap(46, 46, 46)
                             .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnDelete1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSave1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                             .addComponent(btnAdd1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(96, 96, 96)
@@ -227,7 +251,9 @@ public class Home extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addComponent(btnAdd1)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSave1))
+                        .addComponent(btnSave1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -260,11 +286,12 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println("Add event");
         List<String> bookAtt = new ArrayList();
+        bookAtt.add(String.valueOf(data.size() + 1));
         bookAtt.add(txtTenSach.getText());
         bookAtt.add(txtChuyenNganh.getItemAt(txtChuyenNganh.getSelectedIndex()));
+        bookAtt.add(txtTenTacGia.getText());
         bookAtt.add(txtNamXb.getText());
         bookAtt.add(txtSoLuong.getText());
-        bookAtt.add(txtTenTacGia.getText());
         data.add(bookAtt);
         tableModel.addRow(bookAtt.toArray());
         pack();
@@ -277,6 +304,15 @@ public class Home extends javax.swing.JFrame {
     private void txtNamXbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamXbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamXbActionPerformed
+
+    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
+        // TODO add your handling code here:
+        writeDataToFile(this.data);
+    }//GEN-LAST:event_btnSave1ActionPerformed
+
+    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelete1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,6 +351,7 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd1;
+    private javax.swing.JButton btnDelete1;
     private javax.swing.JButton btnSave1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

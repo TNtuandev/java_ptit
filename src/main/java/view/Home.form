@@ -128,6 +128,7 @@
                                   <Component id="txtSoLuong" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="btnDelete1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnSave1" alignment="0" pref="173" max="32767" attributes="0"/>
                                   <Component id="btnAdd1" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -173,6 +174,8 @@
                               <Component id="btnAdd1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnSave1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnDelete1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="455" max="-2" attributes="0"/>
                       </Group>
@@ -239,6 +242,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Xu&#xe2;&#x301;t File"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSave1ActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
@@ -314,6 +320,14 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnDelete1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Xo&#x301;a"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelete1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

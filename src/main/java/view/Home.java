@@ -311,6 +311,8 @@ public class Home extends javax.swing.JFrame {
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
         // TODO add your handling code here:
+        data.remove(jTable1.getSelectedRow());
+        tableModel.removeRow(jTable1.getSelectedRow());
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     /**

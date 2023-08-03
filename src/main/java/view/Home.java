@@ -267,7 +267,6 @@ public class Home extends javax.swing.JFrame {
         bookAtt.add(txtTenTacGia.getText());
         data.add(bookAtt);
         tableModel.addRow(bookAtt.toArray());
-        pack();
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed

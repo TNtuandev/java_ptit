@@ -4,11 +4,18 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author admin
  */
 public class Home extends javax.swing.JFrame {
+
+    List<List<String>> data = new ArrayList<>(new ArrayList<>());
+    DefaultTableModel tableModel;
 
     /**
      * Creates new form Home
@@ -16,6 +23,28 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+    private void initTable() {
+        this.tableModel = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                        "Mã sách", "Tên sách", "Chuyên Ngành", "Năm xuất bản", "Tác giả", "Số lượng"
+                }
+        );
+
+        List<String> a = new ArrayList<>();
+        a.add("1");
+        data.add(a);
+        for (List<String> rowData : data) {
+            tableModel.addRow(rowData.toArray());
+        }
+
+        jTable1.setModel(this.tableModel);
+
+        jScrollPane1.setViewportView(jTable1);
+
+        // Repack the frame to properly display the components
+        pack();
     }
 
     /**
@@ -123,18 +152,7 @@ public class Home extends javax.swing.JFrame {
 
         btnSave1.setText("Xuất File");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã sách ", "Tên sách ", "Chuyên Ngành", "Năm xuất bản", "Tác giả", "Số lượng"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        initTable();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,6 +254,16 @@ public class Home extends javax.swing.JFrame {
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
         // TODO add your handling code here:
+        System.out.println("Add event");
+        List<String> bookAtt = new ArrayList();
+        bookAtt.add(txtTenSach.getText());
+        bookAtt.add(txtChuyenNganh.getText());
+        bookAtt.add(txtNamXb.getText());
+        bookAtt.add(txtSoLuong.getText());
+        bookAtt.add(txtTenTacGia.getText());
+        data.add(bookAtt);
+        tableModel.addRow(bookAtt.toArray());
+        pack();
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
@@ -253,7 +281,7 @@ public class Home extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
